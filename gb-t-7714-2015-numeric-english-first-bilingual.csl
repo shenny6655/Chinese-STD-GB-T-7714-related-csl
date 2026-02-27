@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="zh-CN">
+  <info>
+    <title>GB/T 7714-2015 Numeric (English First + Chinese Bilingual)</title>
+    <id>http://www.zotero.org/styles/gb-t-7714-2015-numeric-english-first-bilingual</id>
+    <link href="http://www.zotero.org/styles/gb-t-7714-2015-numeric-english-first-bilingual" rel="self"/>
+    <link href="https://github.com/redleafnew/Chinese-STD-GB-T-7714-related-csl" rel="documentation"/>
+    <author>
+      <name>Custom English-first bilingual for agriculture journals</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="science"/>
+    <updated>2026-02-27</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+
+  <locale xml:lang="zh-CN">
+    <terms>
+      <term name="et-al">等</term>
+      <term name="and">, </term>
+    </terms>
+  </locale>
+  <locale xml:lang="en">
+    <terms>
+      <term name="et-al">et al.</term>
+    </terms>
+  </locale>
+
+  <!-- 英文部分宏（使用 Extra 里的 original- 字段） -->
+  <macro name="author-original">
+    <names variable="original-author">
+      <name delimiter=", " initialize-with=" " name-as-sort-order="all"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+  <macro name="title-original">
+    <text variable="original-title"/>
+  </macro>
+  <macro name="container-title-original">
+    <text variable="original-container-title" font-style="italic"/>
+  </macro>
+
+  <!-- 中文部分宏（使用普通字段） -->
+  <macro name="author-chinese">
+    <names variable="author">
+      <name delimiter=", " initialize-with="" name-as-sort-order="all"/>
+      <et-al term="et-al"/>
+    </names>
+  </macro>
+  <macro name="title-chinese">
+    <text variable="title"/>
+  </macro>
+  <macro name="container-title-chinese">
+    <text variable="container-title" font-style="italic"/>
+  </macro>
+
+  <!-- 共用宏：年份、卷期页 -->
+  <macro name="issued-year">
+    <date variable="issued" form="numeric" date-parts="year"/>
+  </macro>
+  <macro name="volume-issue-page">
+    <group delimiter=", ">
+      <group>
+        <text variable="volume"/>
+        <text variable="issue" prefix="(" suffix=")"/>
+      </group>
+      <text variable="page"/>
+    </group>
+  </macro>
+
+  <citation collapse="citation-number" after-collapse-delimiter=",">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography entry-spacing="0" hanging-indent="true" et-al-min="4" et-al-use-first="3" second-field-align="flush">
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[" suffix="] "/>
+
+      <!-- ==================== 英文块在前 ==================== -->
+      <group delimiter=". ">
+        <text macro="author-original" suffix=". "/>
+        <text macro="title-original" suffix=". "/>
+        <group delimiter=", ">
+          <text macro="container-title-original"/>
+          <text macro="issued-year"/>
+          <text macro="volume-issue-page"/>
+        </group>
+      </group>
+
+      <text value=". "/>
+
+      <!-- ==================== 中文块在后 ==================== -->
+      <group delimiter=". ">
+        <text macro="author-chinese" suffix=". "/>
+        <text macro="title-chinese" suffix=". "/>
+        <group delimiter=", ">
+          <text macro="container-title-chinese"/>
+          <text macro="issued-year"/>
+          <text macro="volume-issue-page"/>
+        </group>
+      </group>
+    </layout>
+  </bibliography>
+</style>
